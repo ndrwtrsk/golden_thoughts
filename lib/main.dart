@@ -39,19 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
+      body: Column(
+        children: [_buildTitleSection()],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
@@ -60,4 +49,34 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+  Widget _buildTitleSection() => Container(
+        padding: const EdgeInsets.all(32),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      'Oeschinen Lake Campground',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Text(
+                    'Kandersteg, Switzerland',
+                    style: TextStyle(color: Colors.grey[500]),
+                  )
+                ],
+              ),
+            ),
+            Icon(
+              Icons.star,
+              color: Colors.red[500],
+            )
+          ],
+        ),
+      );
 }
