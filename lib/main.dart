@@ -80,10 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            Icon(
-              Icons.star,
-              color: Colors.red[500],
-            )
+            FavouriteWidget(),
           ],
         ),
       );
@@ -132,4 +129,44 @@ class _MyHomePageState extends State<MyHomePage> {
           softWrap: true,
         ),
       );
+}
+
+class FavouriteWidget extends StatefulWidget {
+  @override
+  _FavoriteWidgetState createState() {
+    // TODO: implement createState
+    return _FavoriteWidgetState();
+  }
+
+}
+
+class _FavoriteWidgetState extends State<FavouriteWidget> {
+  bool _isFavorited = false;
+  int _favoriteCount = 41;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Container(
+        padding: EdgeInsets.all(0),
+        child: IconButton(
+          icon: (_isFavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
+          color: Colors.red[500],
+          onPressed: _toggleFavourite,
+        ),
+      ),
+      SizedBox(
+        width: 18,
+          child: Container(
+            child: Text('$_favoriteCount'),
+          ),
+      )
+    ],
+  );
+
+  void _toggleFavourite() => setState(() {
+    _favoriteCount += _isFavorited ? -1 : 1;
+    _isFavorited = !_isFavorited;
+  });
 }
