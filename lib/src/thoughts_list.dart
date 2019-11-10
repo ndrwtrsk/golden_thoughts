@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:golden_thoughts/domain/ListThoughtsUseCase.dart';
 import 'package:golden_thoughts/domain/Thought.dart';
+import 'package:golden_thoughts/infrastructure/injection/InheritedInjection.dart';
 
 class ThoughtsList extends StatefulWidget {
   final ListThoughtsUseCase _useCase;
@@ -8,22 +9,19 @@ class ThoughtsList extends StatefulWidget {
   ThoughtsList(this._useCase, {Key key}) : super(key: key);
 
   @override
-  _ThoughtsListState createState() => _ThoughtsListState(_useCase);
+  _ThoughtsListState createState() => _ThoughtsListState();
 }
 
 class _ThoughtsListState extends State<ThoughtsList> {
-  final ListThoughtsUseCase _useCase;
-
-  _ThoughtsListState(this._useCase);
-
   @override
   Widget build(BuildContext context) {
-    var thoughts = _useCase.thoughts();
-    print(thoughts);
+    var useCase = InheritedInjection.of(context).listThoughtsUseCase;
+    var thoughts = useCase.thoughts();
     return ListView.separated(
         separatorBuilder: (context, index) => const Divider(),
         itemCount: thoughts.length,
-        itemBuilder: (BuildContext context, int index) => _ThoughtListEntry.fromThought(thoughts[index]));
+        itemBuilder: (BuildContext context, int index) =>
+            _ThoughtListEntry.fromThought(thoughts[index]));
   }
 }
 
