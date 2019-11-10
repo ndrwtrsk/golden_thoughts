@@ -1,5 +1,5 @@
-import 'package:golden_thoughts/domain/Thought.dart';
-import 'package:golden_thoughts/domain/ThoughtRepository.dart';
+import 'package:golden_thoughts/domain/thought.dart';
+import 'package:golden_thoughts/domain/thought_repository.dart';
 
 class InMemoryThoughtRepository implements ThoughtRepository {
   Map<String, Thought> map = Map();
@@ -9,6 +9,7 @@ class InMemoryThoughtRepository implements ThoughtRepository {
     return map.values.toList(growable: false);
   }
 
+  @override
   Thought save(Thought thought) {
     map[thought.id] = thought;
     return thought;

@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:golden_thoughts/domain/ListThoughtsUseCase.dart';
-import 'package:golden_thoughts/domain/Thought.dart';
-import 'package:golden_thoughts/infrastructure/injection/InheritedInjection.dart';
+import 'package:golden_thoughts/domain/thought.dart';
+import 'package:golden_thoughts/infrastructure/injection/inherited_injection.dart';
 
 class ThoughtsList extends StatefulWidget {
-  final ListThoughtsUseCase _useCase;
-
-  ThoughtsList(this._useCase, {Key key}) : super(key: key);
-
   @override
   _ThoughtsListState createState() => _ThoughtsListState();
 }

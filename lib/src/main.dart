@@ -1,35 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:golden_thoughts/domain/ListThoughtsUseCase.dart';
-import 'package:golden_thoughts/domain/Thought.dart';
-import 'package:golden_thoughts/infrastructure/injection/InheritedInjection.dart';
-import 'package:golden_thoughts/infrastructure/peristence/InMemoryThoughtRepository.dart';
+import 'package:golden_thoughts/domain/thought.dart';
+import 'package:golden_thoughts/infrastructure/injection/inherited_injection.dart';
+import 'package:golden_thoughts/infrastructure/peristence/in_memory_thought_repository.dart';
+import 'package:golden_thoughts/src/new_thought.dart';
 import 'package:golden_thoughts/src/thoughts_list.dart';
 
 void main() {
-  var repo = InMemoryThoughtRepository();
-  var useCase = ListThoughts(repo);
-  runApp(GoldenThoughtsApp(useCase));
+  runApp(GoldenThoughtsApp());
 }
 
 class GoldenThoughtsApp extends StatelessWidget {
-  final ListThoughts _useCase;
-
-  GoldenThoughtsApp(this._useCase);
-
   @override
   Widget build(BuildContext context) {
     var injector = InheritedInjection(
       child: MaterialApp(
-          title: 'Golden Thoughts',
-          theme: ThemeData(
-            primarySwatch: Colors.amber,
-          ),
-          home: Scaffold(
-            appBar: AppBar(
-              title: Text('Golden Thoughts'),
-            ),
-            body: ThoughtsList(_useCase),
-          )),
+        title: 'Golden Thoughts',
+        theme: ThemeData(
+          primarySwatch: Colors.amber,
+        ),
+        home: GoldenThoughtsScaffold(),
+      ),
     );
     var repo = injector.thoughtRepo as InMemoryThoughtRepository;
     [
@@ -39,4 +29,22 @@ class GoldenThoughtsApp extends StatelessWidget {
     ].forEach((thought) => repo.save(thought));
     return injector;
   }
+}
+
+class GoldenThoughtsScaffold extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text('Golden Thoughts'),
+        ),
+        body: ThoughtsList(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => NewThought()));
+          },
+          tooltip: "Add new thought",
+          child: Icon(Icons.add),
+        ),
+      );
 }

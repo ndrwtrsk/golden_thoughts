@@ -1,7 +1,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_thoughts/domain/Thought.dart';
-import 'package:golden_thoughts/infrastructure/peristence/InMemoryThoughtRepository.dart';
+import 'package:golden_thoughts/domain/thought.dart';
+import 'package:golden_thoughts/infrastructure/peristence/in_memory_thought_repository.dart';
 
 void main() {
   test("should return thoughts", () {
