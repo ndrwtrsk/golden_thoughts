@@ -1,7 +1,7 @@
 import 'package:golden_thoughts/domain/Thought.dart';
 import 'package:golden_thoughts/domain/ThoughtRepository.dart';
 
-class InMemoryThoughtRepository extends ThoughtRepository {
+class InMemoryThoughtRepository implements ThoughtRepository {
 
 
   Map<String, Thought> map = Map();

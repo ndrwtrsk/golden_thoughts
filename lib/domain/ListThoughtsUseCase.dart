@@ -5,7 +5,7 @@ abstract class ListThoughtsUseCase {
   List<Thought> thoughts();
 }
 
-class ListThoughts extends ListThoughtsUseCase {
+class ListThoughts implements ListThoughtsUseCase {
   
   ThoughtRepository _repo;
   
