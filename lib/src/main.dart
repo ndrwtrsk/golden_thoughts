@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:golden_thoughts/training.dart';
+import 'package:golden_thoughts/src/training.dart';
 
 void main() => runApp(GoldenThoughtsApp());
 
